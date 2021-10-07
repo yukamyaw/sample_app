@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  mysql:
+    platform: linux/x86_64
+    image: mysql:8.0
+    container_name: sample_app-db
+    environment:
+      MYSQL_ROOT_PASSWORD: passwd
+      TZ: Asia/Tokyo
+      Lang: C.UTF-8
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --ft_min_word_len=2 --innodb_ft_min_token_size=2 --innodb_ft_enable_stopword=OFF
+    volumes:
+      - ./sample_app-data:/var/lib/mysql
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - "3306:3306"
